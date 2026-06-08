@@ -3,7 +3,7 @@
   ────────────────────────
   Staging model for the TPC-H CUSTOMER source table.
 */
-
+{{ config(materialized='table') }}
 with
 
 source as (
