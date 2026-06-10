@@ -83,7 +83,10 @@ final as (
         case when o.order_status = 'Fulfilled' then true else false end as is_fulfilled,
 
         -- Metadata
-        current_timestamp() as dbt_loaded_at
+        current_timestamp() as dbt_loaded_at,
+
+        -- Surrogate Key
+        {{ dbt_utils.generate_surrogate_key(['o.order_id']) }} AS order_sk
 
     from orders_enriched o
     left join lineitems_agg l on o.order_id = l.order_id
